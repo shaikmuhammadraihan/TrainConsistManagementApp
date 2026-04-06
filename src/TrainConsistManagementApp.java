@@ -1,24 +1,32 @@
-
 import java.util.Arrays;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
         System.out.println("======================================");
-        System.out.println("UC17 - Sort Bogie Names Using Arrays.sort()");
+        System.out.println("UC18 - Linear Search for Bogie ID");
         System.out.println("======================================\n");
 
-        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        String searchKey = "BG309";
+        boolean found = false;
 
-        System.out.println("Original Bogie Names:");
-        System.out.println(Arrays.toString(bogieNames));
+        System.out.println("Searching for Bogie ID: " + searchKey);
 
-        Arrays.sort(bogieNames);
+        for (int i = 0; i < bogieIds.length; i++) {
+            if (bogieIds[i].equals(searchKey)) {
+                found = true;
+                break;
+            }
+        }
 
-        System.out.println("\nSorted Bogie Names (Alphabetical):");
-        System.out.println(Arrays.toString(bogieNames));
+        if (found) {
+            System.out.println("Result: Bogie " + searchKey + " found in the consist.");
+        } else {
+            System.out.println("Result: Bogie " + searchKey + " not found.");
+        }
 
-        System.out.println("\nUC17 sorting completed...");
+        System.out.println("\nUC18 search completed...");
     }
 
     static class CargoSafetyException extends RuntimeException {
