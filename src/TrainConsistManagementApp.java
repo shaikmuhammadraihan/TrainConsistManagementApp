@@ -1,32 +1,44 @@
+
 import java.util.Arrays;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
         System.out.println("======================================");
-        System.out.println("UC18 - Linear Search for Bogie ID");
+        System.out.println("UC19 - Binary Search for Bogie ID");
         System.out.println("======================================\n");
 
         String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
-        String searchKey = "BG309";
-        boolean found = false;
+        Arrays.sort(bogieIds);
 
-        System.out.println("Searching for Bogie ID: " + searchKey);
+        String searchKey = "BG412";
+        int low = 0;
+        int high = bogieIds.length - 1;
+        int resultIndex = -1;
 
-        for (int i = 0; i < bogieIds.length; i++) {
-            if (bogieIds[i].equals(searchKey)) {
-                found = true;
+        System.out.println("Searching for Bogie ID: " + searchKey + " (Sorted Search)");
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int comparison = searchKey.compareTo(bogieIds[mid]);
+
+            if (comparison == 0) {
+                resultIndex = mid;
                 break;
+            } else if (comparison > 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
 
-        if (found) {
-            System.out.println("Result: Bogie " + searchKey + " found in the consist.");
+        if (resultIndex != -1) {
+            System.out.println("Result: Bogie " + searchKey + " found at index " + resultIndex);
         } else {
             System.out.println("Result: Bogie " + searchKey + " not found.");
         }
 
-        System.out.println("\nUC18 search completed...");
+        System.out.println("\nUC19 optimized search completed...");
     }
 
     static class CargoSafetyException extends RuntimeException {
