@@ -5,40 +5,30 @@ public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
         System.out.println("======================================");
-        System.out.println("UC19 - Binary Search for Bogie ID");
+        System.out.println("UC20 - Defensive Programming: Empty State Check");
         System.out.println("======================================\n");
 
-        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
-        Arrays.sort(bogieIds);
+        String[] emptyBogieIds = {};
+        String searchKey = "BG309";
 
-        String searchKey = "BG412";
-        int low = 0;
-        int high = bogieIds.length - 1;
-        int resultIndex = -1;
+        try {
+            System.out.println("Initiating search for Bogie ID: " + searchKey);
 
-        System.out.println("Searching for Bogie ID: " + searchKey + " (Sorted Search)");
-
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            int comparison = searchKey.compareTo(bogieIds[mid]);
-
-            if (comparison == 0) {
-                resultIndex = mid;
-                break;
-            } else if (comparison > 0) {
-                low = mid + 1;
-            } else {
-                high = mid - 1;
+            if (emptyBogieIds.length == 0) {
+                throw new IllegalStateException("Search failed: No bogies available in the train consist.");
             }
+
+            for (String id : emptyBogieIds) {
+                if (id.equals(searchKey)) {
+                    System.out.println("Result: Bogie found.");
+                    return;
+                }
+            }
+        } catch (IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
         }
 
-        if (resultIndex != -1) {
-            System.out.println("Result: Bogie " + searchKey + " found at index " + resultIndex);
-        } else {
-            System.out.println("Result: Bogie " + searchKey + " not found.");
-        }
-
-        System.out.println("\nUC19 optimized search completed...");
+        System.out.println("\nUC20 defensive check completed...");
     }
 
     static class CargoSafetyException extends RuntimeException {
