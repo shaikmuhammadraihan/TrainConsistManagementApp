@@ -1,6 +1,36 @@
 
 public class TrainConsistManagementApp {
 
+    public static void main(String[] args) {
+        System.out.println("======================================");
+        System.out.println("UC16 - Manual Sorting using Bubble Sort");
+        System.out.println("======================================\n");
+
+        int[] capacities = {72, 56, 24, 70, 60};
+
+        System.out.println("Original Capacities:");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
+
+        for (int i = 0; i < capacities.length - 1; i++) {
+            for (int j = 0; j < capacities.length - i - 1; j++) {
+                if (capacities[j] > capacities[j + 1]) {
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("\nSorted Capacities (Ascending):");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
+        System.out.println("\n\nUC16 sorting completed...");
+    }
+
     static class CargoSafetyException extends RuntimeException {
         public CargoSafetyException(String message) {
             super(message);
@@ -28,22 +58,6 @@ public class TrainConsistManagementApp {
                 System.out.println("Cargo validation completed for " + this.shape + " bogie");
             }
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println("======================================");
-        System.out.println("UC15 - Safe Cargo Assignment");
-        System.out.println("======================================\n");
-
-        GoodsBogie cylindricalBogie = new GoodsBogie("Cylindrical");
-        cylindricalBogie.assignCargo("Petroleum");
-
-        System.out.println();
-
-        GoodsBogie rectangularBogie = new GoodsBogie("Rectangular");
-        rectangularBogie.assignCargo("Petroleum");
-
-        System.out.println("\nUC15 runtime handling completed...");
     }
 
     static class InvalidCapacityException extends Exception {
